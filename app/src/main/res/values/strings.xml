@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SPN</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="signin">Sign in</string>
+    <string name="title_activity_online_offline">online_offlineActivity</string>
+    <string name="title_activity_web_page">WebPageActivity</string>
+    <string name="title_activity_display_results">DisplayResults</string>
+    <string name="title_activity_room">RoomActivity</string>
+    <string name="title_activity_device_name">DeviceNameActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+</resources>
