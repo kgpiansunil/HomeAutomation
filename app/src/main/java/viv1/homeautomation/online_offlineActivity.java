@@ -43,11 +43,12 @@ public class online_offlineActivity extends ActionBarActivity {
                 {
                     public void onClick(View view)
                     {
-                        Intent connectToUrl=new Intent(view.getContext(),DisplayResults.class);
-                        //String url=online_url.getText().toString();
-                        //connectToUrl.putExtra("url",url );
-                        startActivity(connectToUrl);
-
+                        if (!isNetworkAvailable() || isMobileNetwork()){
+                            Toast.makeText(online_offlineActivity.this, "Connect to Wifi!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent room=new Intent(view.getContext(),RoomActivity.class);
+                            startActivity(room);
+                        }
                     }
                 });
 
@@ -62,12 +63,8 @@ public class online_offlineActivity extends ActionBarActivity {
                         if (!isNetworkAvailable()){
                             Toast.makeText(online_offlineActivity.this, "Connect to Internet!", Toast.LENGTH_SHORT).show();
                         }else{
-                            Intent connectToUrl=new Intent(view.getContext(),WebPageActivity.class);
-                            String url=online_url.getText().toString();
-                            connectToUrl.putExtra("url",url );
-                            int temp=0;
-                            connectToUrl.putExtra("offline",temp);
-                            startActivity(connectToUrl);
+                            Intent room=new Intent(view.getContext(),RoomActivity2.class);
+                            startActivity(room);
                         }
 
 
@@ -81,6 +78,28 @@ public class online_offlineActivity extends ActionBarActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    private boolean isMobileNetwork() {
+
+       // boolean mobileDataAllowed = Settings.Secure.getInt(getContentResolver(), "mobile_data", 1) == 1;
+        //^^^^^USE ABOVE IF BELOW FAILS^^^^APPARANTLY IT FAILS FOR LOLLIPOP
+        //http://stackoverflow.com/questions/12806709/how-to-tell-if-mobile-network-data-is-enabled-or-disabled-even-when-connected
+
+        boolean mobileDataEnabled = false; // Assume disabled
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        try {
+            Class cmClass = Class.forName(cm.getClass().getName());
+            Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
+            method.setAccessible(true); // Make the method callable
+            // get the setting for "mobile data"
+            mobileDataEnabled = (Boolean)method.invoke(cm);
+        } catch (Exception e) {
+            // Some problem accessible private API
+            // TODO do whatever error handling you want here
+        }
+        return mobileDataEnabled;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

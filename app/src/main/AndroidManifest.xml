@@ -40,20 +40,27 @@
         </activity>
         <activity
             android:name=".RoomActivity"
-            android:label="@string/title_activity_room"
             android:alwaysRetainTaskState="true"
+            android:label="@string/title_activity_room"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".DeviceNameActivity"
             android:label="@string/title_activity_device_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".RoomActivity2"
+            android:label="@string/title_activity_room_activity2"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"  >
         </activity>
     </application>
 

@@ -11,4 +11,5 @@
     <string name="title_activity_room">RoomActivity</string>
     <string name="title_activity_device_name">DeviceNameActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_room_activity2">RoomActivity2</string>
 </resources>
