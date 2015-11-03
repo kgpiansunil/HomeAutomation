@@ -27,7 +27,6 @@ public class online_offlineActivity extends ActionBarActivity {
 
     Button online;
     Button offline;
-    EditText online_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class online_offlineActivity extends ActionBarActivity {
 
         online=(Button) findViewById(R.id.button2);
         offline=(Button) findViewById(R.id.button3);
-        online_url=(EditText) findViewById(R.id.editText_online);
 
 
         offline.setOnClickListener(
