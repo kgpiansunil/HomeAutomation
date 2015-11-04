@@ -268,7 +268,7 @@ public class RoomActivity2 extends ActionBarActivity {
         Intent room_url=new Intent(view.getContext(),WebPageActivity.class);
         String url=room_address[num];
         room_url.putExtra("url",url );
-        int temp=1;
+        int temp=0;
         room_url.putExtra("offline",temp);
         startActivity(room_url);
     }

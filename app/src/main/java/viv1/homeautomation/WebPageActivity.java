@@ -47,7 +47,7 @@ public class WebPageActivity extends ActionBarActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             if(backpage==0) {
-                Intent i = new Intent(WebPageActivity.this, online_offlineActivity.class);
+                Intent i = new Intent(WebPageActivity.this, RoomActivity2.class);
                 startActivity(i);
                 return true;
             }else{
