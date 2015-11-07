@@ -114,6 +114,9 @@ public class RoomActivity extends ActionBarActivity {
 //
 //                    }
 //                });
+
+        //TO DO....
+        //USE A LOOP FOR VISITING PAGES AND EDITING
         butt16.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -205,6 +208,16 @@ public class RoomActivity extends ActionBarActivity {
                 });
 
 
+        //TO DO.....EDIT OPTION FOR ALL BUTTONS....USE LOOP
+        //Edit option on Long Click..template
+        butt16.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                showEditPopUp(view,1);
+                return true;  // avoid extra click events
+            }
+        });
+
+
     }
 
 
@@ -264,6 +277,55 @@ public class RoomActivity extends ActionBarActivity {
         helpDialog.show();
 
     }
+
+    private void showEditPopUp(final View view, final int num) {
+
+        AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+        helpBuilder.setTitle("Edit Location");
+        helpBuilder.setMessage("Enter details");
+//        final EditText input = new EditText(this);
+//        input.setSingleLine();
+//        input.setText("");
+//        helpBuilder.setView(input);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText input = new EditText(this);
+        input.setText(room_name[num]);
+        layout.addView(input);
+
+        final EditText input2 = new EditText(this);
+        input2.setText(room_address[num]);
+        layout.addView(input2);
+
+        helpBuilder.setView(layout);
+
+        helpBuilder.setNeutralButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                    room_name[num] = input.getText().toString();
+                    room_address[num] = input2.getText().toString();
+
+                    int temp_b = num + 15;
+                    String buttid = "button" + temp_b;
+                    int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                    Button b = (Button) findViewById(resID);
+                    b.setText(room_name[num]);
+                    b.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+        // Remember, create doesn't show the dialog
+        AlertDialog helpDialog = helpBuilder.create();
+        helpDialog.show();
+
+    }
+
     public void goToAddress(View view,int num){
         Intent room_url=new Intent(view.getContext(),WebPageActivity.class);
         String url=room_address[num];
