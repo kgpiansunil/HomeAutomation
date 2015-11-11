@@ -114,6 +114,8 @@ public class RoomActivity2 extends ActionBarActivity {
 //
 //                    }
 //                });
+        
+        //use loop here....you'll have to account for around 50 buttons
         butt16.setOnClickListener(
                 new View.OnClickListener()
                 {
