@@ -205,6 +205,14 @@ public class RoomActivity2 extends ActionBarActivity {
                         goToAddress(view, 10);
                     }
                 });
+                
+                //Long click behaviour for all buttons..again use loop here
+        butt16.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+            showEditPopUp(view,1);
+            return true; // avoid extra click events
+            }
+        });
 
 
     }
