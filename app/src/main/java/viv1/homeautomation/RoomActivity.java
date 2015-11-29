@@ -1,9 +1,12 @@
 package viv1.homeautomation;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.ActionBarActivity;
@@ -39,9 +42,15 @@ public class RoomActivity extends ActionBarActivity {
     private int room_num=0;
     private int button_number=15;
 
+    String sddw;
+    int no_rows;
+
     private String[] room_name=new String[12] ;
     private String[] room_address=new String[12] ;
 
+    private SQLiteDatabase db;
+    private String[] allColumns = { "id",
+            "comment" };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +69,41 @@ public class RoomActivity extends ActionBarActivity {
         butt24=(Button) findViewById(R.id.button24);
         butt25=(Button) findViewById(R.id.button25);
 
+
+        //*****************************************************************************
+
+        //Database for storing and retrieving
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        db= databaseHelper.getWritableDatabase();
+
+        ContentValues values1 = new ContentValues();
+        ContentValues values2 = new ContentValues();
+        ContentValues values3 = new ContentValues();
+        ContentValues values4 = new ContentValues();
+        values1.put("bid", "kk1");
+        values1.put("room_name", "kk2");
+        values1.put("room_address", "kk3");
+        values1.put("isVisible", "kk4");
+
+        long insertId = db.insert("room", null,values1);
+
+        Cursor cursor= db.query("room",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+        no_rows=cursor.getCount();//no of rows in database
+
+        cursor.moveToFirst();
+        sddw=cursor.getString(3);//indexing from 0
+
+        //Traversing the rows in the database
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            cursor.moveToNext();
+        }
+
+
+        cursor.close();
+
+
+        //*****************************************************************************
 
 //        Intent intent=getIntent();
 //        Bundle extras= intent.getExtras();

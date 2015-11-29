@@ -12,14 +12,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "spn_room.db";
     private static final int DATABASE_VERSION = 1;
 
-    //SQL st
-    private static final String CREATE_TABLE_NOTE = "create table note"
+    //SQL statement for creating a Table
+    private static final String CREATE_TABLE_ROOM= "create table room"
             + "("
             + "_id" + " integer primary key autoincrement, "
-            + "title" + " text not null, "
-            + "content" + " text not null, "
-            + "modified_time" + " integer not null, "
-            + "created_time" + " integer not null " + ")";
+            + "bid" + " text not null, "
+            + "room_name" + " text not null, "
+            + "room_address" + " text not null, "
+            + "isVisible" + " text not null " + ")";
 
 
 
@@ -29,11 +29,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_NOTE);
+        db.execSQL(CREATE_TABLE_ROOM);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(CREATE_TABLE_NOTE);
+        db.execSQL(CREATE_TABLE_ROOM);
     }
 }
