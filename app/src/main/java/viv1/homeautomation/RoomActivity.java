@@ -45,16 +45,55 @@ public class RoomActivity extends ActionBarActivity {
     String sddw;
     int no_rows;
 
+    DatabaseHelper databaseHelper;
+    Cursor cursor;
+
     private String[] room_name=new String[12] ;
     private String[] room_address=new String[12] ;
 
     private SQLiteDatabase db;
-    private String[] allColumns = { "id",
-            "comment" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+
+        //Create/access database
+        databaseHelper = new DatabaseHelper(this);
+        db= databaseHelper.getWritableDatabase();
+
+        cursor= db.query("room",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+        no_rows=cursor.getCount();//no of rows in database
+
+
+//Populate from database if database is not empty
+        if(no_rows>0) {
+            room_num = no_rows;
+
+            cursor.moveToFirst();
+            //sddw=cursor.getString(3);//indexing from 0
+
+            //Traversing the rows in the database
+            int cnt = 1;
+            while (!cursor.isAfterLast()) {
+                room_name[cnt] = cursor.getString(1);
+                room_address[cnt] = cursor.getString(2);
+                cnt++;
+                cursor.moveToNext();
+            }
+
+            for (int ci = 1; ci < cnt; ci++) {
+                int temp_b = ci + 15;
+                String buttid = "button" + temp_b;
+                int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                Button b = (Button) findViewById(resID);
+                b.setText(room_name[ci]);
+                b.setVisibility(View.VISIBLE);
+            }
+        }
+
+        cursor.close();     //Close cursor...IMP
+
 
         add_button=(Button) findViewById(R.id.button15);
        // remove_button=(Button) findViewById(R.id.button14);
@@ -71,6 +110,7 @@ public class RoomActivity extends ActionBarActivity {
 
 
         //*****************************************************************************
+/*
 
         //Database for storing and retrieving
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
@@ -102,6 +142,7 @@ public class RoomActivity extends ActionBarActivity {
 
         cursor.close();
 
+*/
 
         //*****************************************************************************
 
@@ -238,6 +279,16 @@ public class RoomActivity extends ActionBarActivity {
                     Button b = (Button) findViewById(resID);
                     b.setText(room_name[room_num]);
                     b.setVisibility(View.VISIBLE);
+
+
+                    //Insert into database
+                    ContentValues values1 = new ContentValues();
+                    values1.put("bid", temp_b+"");
+                    values1.put("room_name", room_name[room_num]);
+                    values1.put("room_address", room_address[room_num]);
+                    values1.put("isVisible", "true");
+
+                    long insertId = db.insert("room", null,values1);
                 }
 
             }
@@ -286,6 +337,18 @@ public class RoomActivity extends ActionBarActivity {
                     Button b = (Button) findViewById(resID);
                     b.setText(room_name[num]);
                     b.setVisibility(View.VISIBLE);
+
+                //Update database with new value
+                ContentValues values1 = new ContentValues();
+                values1.put("bid", temp_b+"");
+                values1.put("room_name", room_name[num]);
+                values1.put("room_address", room_address[num]);
+                values1.put("isVisible", "true");
+
+                String selection = "bid"+ " LIKE ?";
+                String[] selectionArgs = { String.valueOf(temp_b+"") };
+
+                long updateId = db.update("room", values1, selection, selectionArgs);
 
 
             }

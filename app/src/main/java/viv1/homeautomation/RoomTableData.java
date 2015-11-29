@@ -2,10 +2,10 @@ package viv1.homeautomation;
 
 public class RoomTableData{
 
-    private String bid;
+    private int bid;
     private String room_name;
     private String room_address;
-    private String isVisible;
+    private boolean isVisible;
 
     public String getRoom_address() {
         return room_address;
@@ -15,11 +15,11 @@ public class RoomTableData{
         this.room_address = room_address;
     }
 
-    public String getBid() {
+    public int getBid() {
         return bid;
     }
 
-    public void setBid(String bid) {
+    public void setBid(int bid) {
         this.bid = bid;
     }
 
@@ -31,11 +31,11 @@ public class RoomTableData{
         this.room_name = room_name;
     }
 
-    public String isVisible() {
+    public boolean isVisible() {
         return isVisible;
     }
 
-    public void setVisible(String isVisible) {
+    public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
     }
 
