@@ -114,97 +114,33 @@ public class RoomActivity2 extends ActionBarActivity {
 //
 //                    }
 //                });
-        
-        //use loop here....you'll have to account for around 50 buttons
-        butt16.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 1);
-                    }
-                });
 
-        butt17.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 2);
-                    }
-                });
+        for(int i=16;i<=25;i++){
 
-        butt18.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
+            final int j=i;      //cannot use i inside inner class unless declared final, and final variable cannot be re assigned...so using j like this.
+            String bid = "button" + i;
+            int resID = getResources().getIdentifier(bid, "id", "viv1.homeautomation");
+            Button b = (Button) findViewById(resID);
+            b.setOnClickListener(
+                    new View.OnClickListener()
                     {
-                        goToAddress(view, 3);
-                    }
-                });
+                        public void onClick(View view)
+                        {
+                            goToAddress(view, j-15);
+                        }
+                    });
 
-        butt19.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 4);
-                    }
-                });
+            //Long Click behaviour
 
-        butt20.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 5);
-                    }
-                });
+            b.setOnLongClickListener(new View.OnLongClickListener() {
+                public boolean onLongClick(View view) {
+                    showEditPopUp(view,j-15);
+                    return true;  // avoid extra click events
+                }
+            });
 
-        butt21.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 6);
-                    }
-                });
+        }
 
-        butt22.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 7);
-                    }
-                });
-
-        butt23.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 8);
-                    }
-                });
-
-        butt24.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 9);
-                    }
-                });
-
-        butt25.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 10);
-                    }
-                });
 
 
     }
@@ -266,6 +202,55 @@ public class RoomActivity2 extends ActionBarActivity {
         helpDialog.show();
 
     }
+
+    private void showEditPopUp(final View view, final int num) {
+
+        AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+        helpBuilder.setTitle("Edit Location");
+        helpBuilder.setMessage("Enter details");
+//        final EditText input = new EditText(this);
+//        input.setSingleLine();
+//        input.setText("");
+//        helpBuilder.setView(input);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText input = new EditText(this);
+        input.setText(room_name[num]);
+        layout.addView(input);
+
+        final EditText input2 = new EditText(this);
+        input2.setText(room_address[num]);
+        layout.addView(input2);
+
+        helpBuilder.setView(layout);
+
+        helpBuilder.setNeutralButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                room_name[num] = input.getText().toString();
+                room_address[num] = input2.getText().toString();
+
+                int temp_b = num + 15;
+                String buttid = "button" + temp_b;
+                int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                Button b = (Button) findViewById(resID);
+                b.setText(room_name[num]);
+                b.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+        // Remember, create doesn't show the dialog
+        AlertDialog helpDialog = helpBuilder.create();
+        helpDialog.show();
+
+    }
+
     public void goToAddress(View view,int num){
         Intent room_url=new Intent(view.getContext(),WebPageActivity.class);
         String url=room_address[num];

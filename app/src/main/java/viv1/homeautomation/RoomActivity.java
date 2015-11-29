@@ -117,105 +117,32 @@ public class RoomActivity extends ActionBarActivity {
 
         //TO DO....
         //USE A LOOP FOR VISITING PAGES AND EDITING
-        butt16.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
+
+        for(int i=16;i<=25;i++){
+
+            final int j=i;      //cannot use i inside inner class unless declared final, and final variable cannot be re assigned...so using j like this.
+            String bid = "button" + i;
+            int resID = getResources().getIdentifier(bid, "id", "viv1.homeautomation");
+            Button b = (Button) findViewById(resID);
+            b.setOnClickListener(
+                    new View.OnClickListener()
                     {
-                        goToAddress(view, 1);
-                    }
-                });
+                        public void onClick(View view)
+                        {
+                            goToAddress(view, j-15);
+                        }
+                    });
 
-        butt17.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 2);
-                    }
-                });
+            //Long Click behaviour
 
-        butt18.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 3);
-                    }
-                });
+            b.setOnLongClickListener(new View.OnLongClickListener() {
+                public boolean onLongClick(View view) {
+                    showEditPopUp(view,j-15);
+                    return true;  // avoid extra click events
+                }
+            });
 
-        butt19.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 4);
-                    }
-                });
-
-        butt20.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 5);
-                    }
-                });
-
-        butt21.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 6);
-                    }
-                });
-
-        butt22.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 7);
-                    }
-                });
-
-        butt23.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 8);
-                    }
-                });
-
-        butt24.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 9);
-                    }
-                });
-
-        butt25.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        goToAddress(view, 10);
-                    }
-                });
-
-
-        //TO DO.....EDIT OPTION FOR ALL BUTTONS....USE LOOP
-        //Edit option on Long Click..template
-        butt16.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View view) {
-                showEditPopUp(view,1);
-                return true;  // avoid extra click events
-            }
-        });
+        }
 
 
     }
