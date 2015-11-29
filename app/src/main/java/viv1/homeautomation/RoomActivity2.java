@@ -1,9 +1,12 @@
 package viv1.homeautomation;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.ActionBarActivity;
@@ -39,13 +42,58 @@ public class RoomActivity2 extends ActionBarActivity {
     private int room_num=0;
     private int button_number=15;
 
+    String sddw;
+    int no_rows;
+
+    DatabaseHelper2 databaseHelper;
+    Cursor cursor;
+
     private String[] room_name=new String[12] ;
     private String[] room_address=new String[12] ;
+
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+
+        //Create/access database
+        databaseHelper = new DatabaseHelper2(this);
+        db= databaseHelper.getWritableDatabase();
+
+        cursor= db.query("room1",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+        no_rows=cursor.getCount();//no of rows in database
+
+
+//Populate from database if database is not empty
+        if(no_rows>0) {
+            room_num = no_rows;
+
+            cursor.moveToFirst();
+            //sddw=cursor.getString(3);//indexing from 0
+
+            //Traversing the rows in the database
+            int cnt = 1;
+            while (!cursor.isAfterLast()) {
+                room_name[cnt] = cursor.getString(1);
+                room_address[cnt] = cursor.getString(2);
+                cnt++;
+                cursor.moveToNext();
+            }
+
+            for (int ci = 1; ci < cnt; ci++) {
+                int temp_b = ci + 15;
+                String buttid = "button" + temp_b;
+                int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                Button b = (Button) findViewById(resID);
+                b.setText(room_name[ci]);
+                b.setVisibility(View.VISIBLE);
+            }
+        }
+
+        cursor.close();     //Close cursor...IMP
+
 
         add_button=(Button) findViewById(R.id.button15);
         // remove_button=(Button) findViewById(R.id.button14);
@@ -60,6 +108,43 @@ public class RoomActivity2 extends ActionBarActivity {
         butt24=(Button) findViewById(R.id.button24);
         butt25=(Button) findViewById(R.id.button25);
 
+
+        //*****************************************************************************
+/*
+
+        //Database for storing and retrieving
+        DatabaseHelper2 databaseHelper = new DatabaseHelper2(this);
+        db= databaseHelper.getWritableDatabase();
+
+        ContentValues values1 = new ContentValues();
+        ContentValues values2 = new ContentValues();
+        ContentValues values3 = new ContentValues();
+        ContentValues values4 = new ContentValues();
+        values1.put("bid", "kk1");
+        values1.put("room_name", "kk2");
+        values1.put("room_address", "kk3");
+        values1.put("isVisible", "kk4");
+
+        long insertId = db.insert("room1", null,values1);
+
+        Cursor cursor= db.query("room1",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+        no_rows=cursor.getCount();//no of rows in database
+
+        cursor.moveToFirst();
+        sddw=cursor.getString(3);//indexing from 0
+
+        //Traversing the rows in the database
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            cursor.moveToNext();
+        }
+
+
+        cursor.close();
+
+*/
+
+        //*****************************************************************************
 
 //        Intent intent=getIntent();
 //        Bundle extras= intent.getExtras();
@@ -115,6 +200,9 @@ public class RoomActivity2 extends ActionBarActivity {
 //                    }
 //                });
 
+        //TO DO....
+        //USE A LOOP FOR VISITING PAGES AND EDITING
+
         for(int i=16;i<=25;i++){
 
             final int j=i;      //cannot use i inside inner class unless declared final, and final variable cannot be re assigned...so using j like this.
@@ -140,7 +228,6 @@ public class RoomActivity2 extends ActionBarActivity {
             });
 
         }
-
 
 
     }
@@ -192,6 +279,16 @@ public class RoomActivity2 extends ActionBarActivity {
                     Button b = (Button) findViewById(resID);
                     b.setText(room_name[room_num]);
                     b.setVisibility(View.VISIBLE);
+
+
+                    //Insert into database
+                    ContentValues values1 = new ContentValues();
+                    values1.put("bid", temp_b+"");
+                    values1.put("room_name", room_name[room_num]);
+                    values1.put("room_address", room_address[room_num]);
+                    values1.put("isVisible", "true");
+
+                    long insertId = db.insert("room1", null,values1);
                 }
 
             }
@@ -240,6 +337,18 @@ public class RoomActivity2 extends ActionBarActivity {
                 Button b = (Button) findViewById(resID);
                 b.setText(room_name[num]);
                 b.setVisibility(View.VISIBLE);
+
+                //Update database with new value
+                ContentValues values1 = new ContentValues();
+                values1.put("bid", temp_b+"");
+                values1.put("room_name", room_name[num]);
+                values1.put("room_address", room_address[num]);
+                values1.put("isVisible", "true");
+
+                String selection = "bid"+ " LIKE ?";
+                String[] selectionArgs = { String.valueOf(temp_b+"") };
+
+                long updateId = db.update("room1", values1, selection, selectionArgs);
 
 
             }
