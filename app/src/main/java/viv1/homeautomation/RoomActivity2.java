@@ -453,7 +453,7 @@ public class RoomActivity2 extends ActionBarActivity {
             }
         });
 
-        helpBuilder.setNeutralButton("Submit", new DialogInterface.OnClickListener() {
+        helpBuilder.setNegativeButton("Submit", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
