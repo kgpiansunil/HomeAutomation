@@ -37,6 +37,54 @@ public class RoomActivity2 extends ActionBarActivity {
     private Button butt23;
     private Button butt24;
     private Button butt25;
+    private Button butt26;
+    private Button butt27;
+    private Button butt28;
+    private Button butt29;
+    private Button butt30;
+    private Button butt31;
+    private Button butt32;
+    private Button butt33;
+    private Button butt34;
+    private Button butt35;
+    private Button butt36;
+    private Button butt37;
+    private Button butt38;
+    private Button butt39;
+    private Button butt40;
+    private Button butt41;
+    private Button butt42;
+    private Button butt43;
+    private Button butt44;
+    private Button butt45;
+    private Button butt46;
+    private Button butt47;
+    private Button butt48;
+    private Button butt49;
+    private Button butt50;
+    private Button butt51;
+    private Button butt52;
+    private Button butt53;
+    private Button butt54;
+    private Button butt55;
+    private Button butt56;
+    private Button butt57;
+    private Button butt58;
+    private Button butt59;
+    private Button butt60;
+    private Button butt61;
+    private Button butt62;
+    private Button butt63;
+    private Button butt64;
+    private Button butt65;
+    private Button butt66;
+    private Button butt67;
+    private Button butt68;
+    private Button butt69;
+    private Button butt70;
+    private Button butt71;
+    private Button butt72;
+
     private String string_name;
     private String string_address;
     private int room_num=0;
@@ -48,8 +96,8 @@ public class RoomActivity2 extends ActionBarActivity {
     DatabaseHelper2 databaseHelper;
     Cursor cursor;
 
-    private String[] room_name=new String[12] ;
-    private String[] room_address=new String[12] ;
+    private String[] room_name;
+    private String[] room_address;
 
     private SQLiteDatabase db;
 
@@ -58,41 +106,7 @@ public class RoomActivity2 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
-        //Create/access database
-        databaseHelper = new DatabaseHelper2(this);
-        db= databaseHelper.getWritableDatabase();
-
-        cursor= db.query("room1",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
-        no_rows=cursor.getCount();//no of rows in database
-
-
-//Populate from database if database is not empty
-        if(no_rows>0) {
-            room_num = no_rows;
-
-            cursor.moveToFirst();
-            //sddw=cursor.getString(3);//indexing from 0
-
-            //Traversing the rows in the database
-            int cnt = 1;
-            while (!cursor.isAfterLast()) {
-                room_name[cnt] = cursor.getString(1);
-                room_address[cnt] = cursor.getString(2);
-                cnt++;
-                cursor.moveToNext();
-            }
-
-            for (int ci = 1; ci < cnt; ci++) {
-                int temp_b = ci + 15;
-                String buttid = "button" + temp_b;
-                int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
-                Button b = (Button) findViewById(resID);
-                b.setText(room_name[ci]);
-                b.setVisibility(View.VISIBLE);
-            }
-        }
-
-        cursor.close();     //Close cursor...IMP
+        Populate();//Populate from database
 
 
         add_button=(Button) findViewById(R.id.button15);
@@ -107,6 +121,54 @@ public class RoomActivity2 extends ActionBarActivity {
         butt23=(Button) findViewById(R.id.button23);
         butt24=(Button) findViewById(R.id.button24);
         butt25=(Button) findViewById(R.id.button25);
+        butt26=(Button) findViewById(R.id.button26);
+        butt27=(Button) findViewById(R.id.button27);
+        butt28=(Button) findViewById(R.id.button28);
+        butt29=(Button) findViewById(R.id.button29);
+        butt30=(Button) findViewById(R.id.button30);
+        butt31=(Button) findViewById(R.id.button31);
+        butt32=(Button) findViewById(R.id.button32);
+        butt33=(Button) findViewById(R.id.button33);
+        butt34=(Button) findViewById(R.id.button34);
+        butt35=(Button) findViewById(R.id.button35);
+        butt36=(Button) findViewById(R.id.button36);
+        butt37=(Button) findViewById(R.id.button37);
+        butt38=(Button) findViewById(R.id.button38);
+        butt39=(Button) findViewById(R.id.button39);
+        butt40=(Button) findViewById(R.id.button40);
+        butt41=(Button) findViewById(R.id.button41);
+        butt42=(Button) findViewById(R.id.button42);
+        butt43=(Button) findViewById(R.id.button43);
+        butt44=(Button) findViewById(R.id.button44);
+        butt45=(Button) findViewById(R.id.button45);
+        butt46=(Button) findViewById(R.id.button46);
+        butt47=(Button) findViewById(R.id.button47);
+        butt48=(Button) findViewById(R.id.button48);
+        butt49=(Button) findViewById(R.id.button49);
+        butt50=(Button) findViewById(R.id.button50);
+        butt51=(Button) findViewById(R.id.button51);
+        butt52=(Button) findViewById(R.id.button52);
+        butt53=(Button) findViewById(R.id.button53);
+        butt54=(Button) findViewById(R.id.button54);
+        butt55=(Button) findViewById(R.id.button55);
+        butt56=(Button) findViewById(R.id.button56);
+        butt57=(Button) findViewById(R.id.button57);
+        butt58=(Button) findViewById(R.id.button58);
+        butt59=(Button) findViewById(R.id.button59);
+        butt60=(Button) findViewById(R.id.button60);
+        butt61=(Button) findViewById(R.id.button61);
+        butt62=(Button) findViewById(R.id.button62);
+        butt63=(Button) findViewById(R.id.button63);
+        butt64=(Button) findViewById(R.id.button64);
+        butt65=(Button) findViewById(R.id.button65);
+        butt66=(Button) findViewById(R.id.button66);
+        butt67=(Button) findViewById(R.id.button67);
+        butt68=(Button) findViewById(R.id.button68);
+        butt69=(Button) findViewById(R.id.button69);
+        butt70=(Button) findViewById(R.id.button70);
+        butt71=(Button) findViewById(R.id.button71);
+        butt72=(Button) findViewById(R.id.button72);
+
 
 
         //*****************************************************************************
@@ -203,7 +265,7 @@ public class RoomActivity2 extends ActionBarActivity {
         //TO DO....
         //USE A LOOP FOR VISITING PAGES AND EDITING
 
-        for(int i=16;i<=25;i++){
+        for(int i=16;i<=70;i++){
 
             final int j=i;      //cannot use i inside inner class unless declared final, and final variable cannot be re assigned...so using j like this.
             String bid = "button" + i;
@@ -268,7 +330,7 @@ public class RoomActivity2 extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 room_num++;
-                if(room_num>10) Toast.makeText(RoomActivity2.this, "Cannot Add more!", Toast.LENGTH_SHORT).show();
+                if(room_num>50) {Toast.makeText(RoomActivity2.this, "Cannot Add more!", Toast.LENGTH_SHORT).show();room_num=50;}
                 else {
                     room_name[room_num] = input.getText().toString();
                     room_address[room_num] = input2.getText().toString();
@@ -323,6 +385,74 @@ public class RoomActivity2 extends ActionBarActivity {
 
         helpBuilder.setView(layout);
 
+        helpBuilder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+//                room_name[num] = input.getText().toString();
+//                room_address[num] = input2.getText().toString();
+                cursor= db.query("room1",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+                no_rows=cursor.getCount();//no of rows in database
+
+
+                /*Here, we carry out deletion of button in the follwing steps:
+                    1.delete the row from database;
+                    2.Make all the butttons invisible;
+                    3.for button with bid i, update bid of all buttons with bid j such that j>i by subtracting 1;
+                    4.Re populate from database
+                    */
+
+                //Step 1
+                int tb=num+15;
+
+                String selection = "bid"+ " LIKE ?";
+                String[] selectionArgs = { String.valueOf(tb+"") };
+
+                long deleteId = db.delete("room1", selection, selectionArgs);
+
+                //Step 2
+                for(int j=1;j<=no_rows;j++) {
+                    int temp_b = j + 15;
+                    String buttid = "button" + temp_b;
+                    int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                    Button b = (Button) findViewById(resID);
+                    //b.setText(room_name[num]);
+                    b.setVisibility(View.INVISIBLE);
+                }
+
+                //Step 3
+                if(num<no_rows) {
+                    cursor.moveToPosition(num);
+                }else{
+                    cursor.moveToLast();        //without this else, there is runtime error on deleting last button
+                }
+                while (!cursor.isAfterLast()) {
+                    String s=cursor.getString(0);
+                    int int_s=Integer.parseInt(s);
+                    int updated_int_s=int_s-1;
+                    String updated_s=updated_int_s+"";
+                    //Update database with new value
+                    ContentValues values1 = new ContentValues();
+                    values1.put("bid", updated_s);
+
+                    String sel= "bid"+ " LIKE ?";
+                    String[] selArgs = { String.valueOf(s) };
+
+                    long updateId = db.update("room1", values1, sel, selArgs);
+
+                    cursor.moveToNext();
+                }
+
+                cursor.close();
+
+                //Step 4
+                Populate();
+
+
+            }
+        });
+
         helpBuilder.setNeutralButton("Submit", new DialogInterface.OnClickListener() {
 
             @Override
@@ -368,6 +498,48 @@ public class RoomActivity2 extends ActionBarActivity {
         room_url.putExtra("offline",temp);
         startActivity(room_url);
     }
+
+    public void Populate(){
+        //Create/access database
+        room_name=new String[55] ;
+        room_address=new String[55] ;
+
+        databaseHelper = new DatabaseHelper2(this);
+        db= databaseHelper.getWritableDatabase();
+
+        cursor= db.query("room1",new String[] { "bid", "room_name", "room_address", "isVisible"},null, null, null, null, null);
+        no_rows=cursor.getCount();//no of rows in database
+
+
+//Populate from database if database is not empty
+        room_num = no_rows;
+        if(no_rows>0) {
+
+            cursor.moveToFirst();
+            //sddw=cursor.getString(3);//indexing from 0
+
+            //Traversing the rows in the database
+            int cnt = 1;
+            while (!cursor.isAfterLast()) {
+                room_name[cnt] = cursor.getString(1);
+                room_address[cnt] = cursor.getString(2);
+                cnt++;
+                cursor.moveToNext();
+            }
+
+            for (int ci = 1; ci < cnt; ci++) {
+                int temp_b = ci + 15;
+                String buttid = "button" + temp_b;
+                int resID = getResources().getIdentifier(buttid, "id", "viv1.homeautomation");
+                Button b = (Button) findViewById(resID);
+                b.setText(room_name[ci]);
+                b.setVisibility(View.VISIBLE);
+            }
+        }
+
+        cursor.close();     //Close cursor...IMP
+    }
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
