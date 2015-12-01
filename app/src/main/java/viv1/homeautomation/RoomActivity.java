@@ -37,6 +37,54 @@ public class RoomActivity extends ActionBarActivity {
     private Button butt23;
     private Button butt24;
     private Button butt25;
+    private Button butt26;
+    private Button butt27;
+    private Button butt28;
+    private Button butt29;
+    private Button butt30;
+    private Button butt31;
+    private Button butt32;
+    private Button butt33;
+    private Button butt34;
+    private Button butt35;
+    private Button butt36;
+    private Button butt37;
+    private Button butt38;
+    private Button butt39;
+    private Button butt40;
+    private Button butt41;
+    private Button butt42;
+    private Button butt43;
+    private Button butt44;
+    private Button butt45;
+    private Button butt46;
+    private Button butt47;
+    private Button butt48;
+    private Button butt49;
+    private Button butt50;
+    private Button butt51;
+    private Button butt52;
+    private Button butt53;
+    private Button butt54;
+    private Button butt55;
+    private Button butt56;
+    private Button butt57;
+    private Button butt58;
+    private Button butt59;
+    private Button butt60;
+    private Button butt61;
+    private Button butt62;
+    private Button butt63;
+    private Button butt64;
+    private Button butt65;
+    private Button butt66;
+    private Button butt67;
+    private Button butt68;
+    private Button butt69;
+    private Button butt70;
+    private Button butt71;
+    private Button butt72;
+
     private String string_name;
     private String string_address;
     private int room_num=0;
@@ -73,6 +121,53 @@ public class RoomActivity extends ActionBarActivity {
         butt23=(Button) findViewById(R.id.button23);
         butt24=(Button) findViewById(R.id.button24);
         butt25=(Button) findViewById(R.id.button25);
+        butt26=(Button) findViewById(R.id.button26);
+        butt27=(Button) findViewById(R.id.button27);
+        butt28=(Button) findViewById(R.id.button28);
+        butt29=(Button) findViewById(R.id.button29);
+        butt30=(Button) findViewById(R.id.button30);
+        butt31=(Button) findViewById(R.id.button31);
+        butt32=(Button) findViewById(R.id.button32);
+        butt33=(Button) findViewById(R.id.button33);
+        butt34=(Button) findViewById(R.id.button34);
+        butt35=(Button) findViewById(R.id.button35);
+        butt36=(Button) findViewById(R.id.button36);
+        butt37=(Button) findViewById(R.id.button37);
+        butt38=(Button) findViewById(R.id.button38);
+        butt39=(Button) findViewById(R.id.button39);
+        butt40=(Button) findViewById(R.id.button40);
+        butt41=(Button) findViewById(R.id.button41);
+        butt42=(Button) findViewById(R.id.button42);
+        butt43=(Button) findViewById(R.id.button43);
+        butt44=(Button) findViewById(R.id.button44);
+        butt45=(Button) findViewById(R.id.button45);
+        butt46=(Button) findViewById(R.id.button46);
+        butt47=(Button) findViewById(R.id.button47);
+        butt48=(Button) findViewById(R.id.button48);
+        butt49=(Button) findViewById(R.id.button49);
+        butt50=(Button) findViewById(R.id.button50);
+        butt51=(Button) findViewById(R.id.button51);
+        butt52=(Button) findViewById(R.id.button52);
+        butt53=(Button) findViewById(R.id.button53);
+        butt54=(Button) findViewById(R.id.button54);
+        butt55=(Button) findViewById(R.id.button55);
+        butt56=(Button) findViewById(R.id.button56);
+        butt57=(Button) findViewById(R.id.button57);
+        butt58=(Button) findViewById(R.id.button58);
+        butt59=(Button) findViewById(R.id.button59);
+        butt60=(Button) findViewById(R.id.button60);
+        butt61=(Button) findViewById(R.id.button61);
+        butt62=(Button) findViewById(R.id.button62);
+        butt63=(Button) findViewById(R.id.button63);
+        butt64=(Button) findViewById(R.id.button64);
+        butt65=(Button) findViewById(R.id.button65);
+        butt66=(Button) findViewById(R.id.button66);
+        butt67=(Button) findViewById(R.id.button67);
+        butt68=(Button) findViewById(R.id.button68);
+        butt69=(Button) findViewById(R.id.button69);
+        butt70=(Button) findViewById(R.id.button70);
+        butt71=(Button) findViewById(R.id.button71);
+        butt72=(Button) findViewById(R.id.button72);
 
 
         //*****************************************************************************
@@ -169,7 +264,7 @@ public class RoomActivity extends ActionBarActivity {
         //TO DO....
         //USE A LOOP FOR VISITING PAGES AND EDITING
 
-        for(int i=16;i<=25;i++){
+        for(int i=16;i<=70;i++){
 
             final int j=i;      //cannot use i inside inner class unless declared final, and final variable cannot be re assigned...so using j like this.
             String bid = "button" + i;
@@ -234,7 +329,7 @@ public class RoomActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 room_num++;
-                if(room_num>10) {Toast.makeText(RoomActivity.this, "Cannot Add more!", Toast.LENGTH_SHORT).show();room_num=10;}
+                if(room_num>50) {Toast.makeText(RoomActivity.this, "Cannot Add more!", Toast.LENGTH_SHORT).show();room_num=50;}
                 else {
                     room_name[room_num] = input.getText().toString();
                     room_address[room_num] = input2.getText().toString();
@@ -406,8 +501,8 @@ public class RoomActivity extends ActionBarActivity {
 
     public void Populate(){
         //Create/access database
-        room_name=new String[12] ;
-        room_address=new String[12] ;
+        room_name=new String[55] ;
+        room_address=new String[55] ;
 
         databaseHelper = new DatabaseHelper(this);
         db= databaseHelper.getWritableDatabase();
